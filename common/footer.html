@@ -1,3 +1,12 @@
 <div class="d-flex justify-content-center mt-5">
-    <p class="text-center text-secondary mt-3 sticky-bottom">&copy; 2024 HarryC All rights reserved.</p>
+    <p class="text-center text-secondary mt-3 sticky-bottom">&copy; <span id="thisYear"></span> HarryC All rights reserved.</p>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // 獲取當前年份
+        var thisYear = new Date().getFullYear();
+        // 將當前年份顯示在指定的 span 元素中
+        $('#thisYear').text(thisYear);
+    });
+</script>
