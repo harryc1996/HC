@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>股票買賣損益計算機 - HarryC</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="css/style1.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+
+    <body style="background-color: #333;">
+        <header class="sticky-top">
+          <div id="navbar-placeholder"></div>
+        </header>
+        <main class="container">
+            <div class="row col-lg-6 mx-auto rounded p-3 shadow mt-3" style="background-color: #222;">
+                <div class="mt-3 mb-3">
+                  <div class="d-flex p-3 mb-4 calc-title">股票買賣損益計算機</div>
+                    <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label" for="inputBuyPrice">每股買入價格</label>
+                        <input type="number" class="form-control input-style" id="inputBuyPrice">
+                    </div>
+                    <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label" for="inputSellPrice">每股賣出價格</label>
+                        <input type="number" class="form-control input-style" id="inputSellPrice">
+                    </div>
+                    <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label" for="inputStockQty">請輸入數量 ( 股 )</label>
+                        <input type="number" class="form-control input-style" id="inputStockQty">
+                    </div>
+                    <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label" for="selectFeeDiscount">手續費折扣</label>
+                        <select class="form-select input-style" id="selectFeeDiscount">
+                          <option value="1" selected>沒有折扣</option>
+                          <option value=".95">95折</option>
+                          <option value=".9">9折</option>
+                          <option value=".85">85折</option>
+                          <option value=".8">8折</option>
+                          <option value=".75">75折</option>
+                          <option value=".7">7折</option>
+                          <option value=".65">65折</option>
+                          <option value=".6">6折</option>
+                          <option value=".55">55折</option>
+                          <option value=".5">5折</option>
+                          <option value=".45">45折</option>
+                          <option value=".4">4折</option>
+                          <option value=".35">35折</option>
+                          <option value=".3">3折</option>
+                          <option value=".25">25折</option>
+                          <option value=".2">2折</option>
+                          <option value=".15">15折</option>
+                          <option value=".1">1折</option>
+                          <option value="0">免手續費</option>
+                        </select>
+                    </div>
+                    <div class="mt-3 d-grid gap-2 mb-3 col-10 col-lg-8 mx-auto target-div">
+                        <button class="btn btn-primary" type="button" id="calcButton">股票損益試算</button>
+                    </div>
+                </div>
+              </div>
+              <div class="row col-lg-6 mx-auto rounded p-3 shadow mt-3" style="background-color: #222;">
+                  <div class="mt-3 mb-3">
+                    <div class="d-flex p-3 mb-4 calc-title" style="background-color: #b00;">買入試算結果</div>
+                      <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label">股票買入淨值</label>
+                        <input class="form-control input-style" id="buyNetCalcResult" readonly>
+                      </div>
+                      <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label">折扣後手續費</label>
+                        <input class="form-control input-style" id="buyFeeResult" readonly>
+                      </div>
+                      <div class="mb-3 col-10 col-lg-8 mx-auto">
+                        <label class="form-label">股票買入總成本</label>
+                        <input class="form-control input-style" id="buyTotalCalcResult" style="color: #f00;" readonly>
+                      </div>
+                  </div>
+                </div>
+                <div class="row col-lg-6 mx-auto rounded p-3 shadow mt-3" style="background-color: #222;">
+                    <div class="mt-3 mb-3">
+                      <div class="d-flex p-3 mb-4 calc-title" style="background-color: #090;">賣出試算結果</div>
+                        <div class="mb-3 col-10 col-lg-8 mx-auto">
+                            <label class="form-label">股票賣出淨值</label>
+                            <input class="form-control input-style" id="sellNetCalcResult" readonly>
+                        </div>
+                        <div class="mb-3 col-10 col-lg-8 mx-auto">
+                            <label class="form-label">折扣後手續費</label>
+                            <input class="form-control input-style" id="sellFeeResult" readonly>
+                        </div>
+                        <div class="mb-3 col-10 col-lg-8 mx-auto">
+                            <label class="form-label">證券交易稅</label>
+                            <input class="form-control input-style" id="sellTaxResult" readonly>
+                        </div>
+                        <div class="mb-3 col-10 col-lg-8 mx-auto">
+                            <label class="form-label">股票賣出總收入</label>
+                            <input class="form-control input-style" id="sellTotalCalcResult" style="color: #090;" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-6 mx-auto rounded p-3 shadow mt-3" style="background-color: #222;">
+                    <div class="mt-3 mb-3">
+                      <div class="d-flex p-3 mb-4 calc-title" style="background-color: #ea0; color: #222;">買賣損益結果</div>
+                        <div class="mb-3 col-10 col-lg-8 mx-auto">
+                            <label class="form-label">損益</label>
+                            <input class="form-control input-style" id="polResult" readonly>
+                        </div>
+                        <div class="mb-3 col-10 col-lg-8 mx-auto">
+                            <label class="form-label">報酬率</label>
+                            <input class="form-control input-style" id="roiResult" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 mx-auto mt-5">
+                  <h3><span class="badge text-bg-secondary">免責聲明</span></h3>
+                  <h4>本計算機僅供參考。</h4>
+                </div>
+        </main>
+        <footer>
+            <div id="footer-placeholder"></div>
+        </footer>
+    </body>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous" ></script>
+    <!-- 將 header 設置為通用模板 -->
+    <script>
+      $(function () {
+        $("#navbar-placeholder").load("common/header.html");
+        $("#footer-placeholder").load("common/footer.html");
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $('#calcButton').on('click', function () {
+
+          // 獲取股票買入價格
+          var buyPrice = $("#inputBuyPrice").val();
+
+          // 獲取股票賣出價格
+          var sellPrice = $("#inputSellPrice").val();
+
+          // 獲取股票數量
+          var stockQty = $("#inputStockQty").val();
+
+          // 股票交易的手續費折扣
+          var feeDiscount = $("#selectFeeDiscount").val();
+
+          // 股票買入淨值
+          var buyNetResult = ( buyPrice * stockQty );
+          var buyNetCalcResult = buyNetResult.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#buyNetCalcResult').val("NT$ " + buyNetCalcResult);
+
+          // 計算股票買入手續費 未滿 20 以 20 計算
+          var buyFee = buyNetResult * 0.001425 * feeDiscount;
+          if ((buyFee < 20) && (buyFee != 0)){
+              buyFee = 20
+          }
+          var buyFeeResult = buyFee.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#buyFeeResult').val("NT$ " + buyFeeResult)
+
+          // 計算買入總支出
+          var buyTotal = buyNetResult + buyFee;
+          var buyTotalResult = buyTotal.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#buyTotalCalcResult').val("NT$ " + buyTotalResult);
+
+          // 股票賣出淨值
+          var sellNetResult = ( sellPrice * stockQty );
+          var sellNetCalcResult = sellNetResult.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#sellNetCalcResult').val("NT$ " + sellNetCalcResult);
+
+          // 計算股票賣出手續費 未滿 20 以 20 計算
+          var sellFee = sellNetResult * 0.001425 * feeDiscount;
+          if ((sellFee < 20) && (sellFee != 0)){
+              sellFee = 20
+          }
+          var sellFeeResult = sellFee.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#sellFeeResult').val("NT$ " + sellFeeResult)
+
+          // 計算股票賣出證券交易稅 0.3 %
+          var sellTax = sellNetResult * 0.003;
+          var sellTaxResult = sellTax.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#sellTaxResult').val("NT$ " + sellTaxResult)
+
+          // 計算賣出總收入
+          var sellTotal = sellNetResult - sellFee - sellTax;
+          var sellTotalResult = sellTotal.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+          $('#sellTotalCalcResult').val("NT$ " + sellTotalResult);
+
+          // 計算損益
+          var pol = sellTotal - buyTotal;
+          var polResult = pol.toLocaleString('zh-TW', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            });
+
+          $('#polResult').val("NT$ " + polResult);
+
+          // 計算報酬率
+          var roi = ( pol / buyTotal ) * 100;
+          var roiResult = roi.toFixed(2);
+          $('#roiResult').val(roiResult + "%");
+
+          if ((pol < 0) && (pol != 0)) {
+              $("#polResult").css({"background-color": "#090", "color": "#fff"}); // 綠底白字
+          } else {
+              $("#polResult").css({"background-color": "#900", "color": "#fff"}); // 紅底白字
+          }
+
+          if ((roi < 0) && (roi != 0)) {
+              $("#roiResult").css({"background-color": "#090", "color": "#fff"}); // 綠底白字
+          } else {
+              $("#roiResult").css({"background-color": "#900", "color": "#fff"}); // 紅底白字
+          }
+
+
+          // 滾動到指定的 div
+          $('html, body').animate({
+              scrollTop: $(".target-div").offset().top
+          }, 100);
+
+          });
+      });
+    </script>
+</html>

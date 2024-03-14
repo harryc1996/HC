@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>BMR&TDEE計算機 - HarryC</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="css/style1.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+          /* 未選取的 radio 樣式 */
+          .btn-check:not(:checked) + .btn {
+            color: #fff;
+            background-color: #333;
+            width: 100px;
+          }
+        
+          /* 被選取的 radio 樣式 */
+          .btn-check:checked + .btn {
+            color: #fff;
+            background-color: rgb(22, 131, 194);
+            width: 100px;
+          }
+        </style>
+    </head>
+
+    <body style="background-color: #333;">
+        <header class="sticky-top">
+          <div id="navbar-placeholder"></div>
+        </header>
+        <main class="container">
+          <div class="row col-lg-6 mx-auto rounded p-3 shadow mt-3" style="background-color: #222;">
+            <div class="mt-3 mb-3">
+              <div class="d-flex p-3 mb-4 calc-title">BMR&TDEE計算機</div>
+                <div class="mt-3 mb-3 col-10 col-lg-8 mx-auto">
+                  <p>請選擇性別</p>
+                  <input type="radio" class="btn-check" name="gender" value="male" id="male" autocomplete="off" checked>
+                  <label class="btn" for="male">男性</label>
+                  <input type="radio" class="btn-check" name="gender" value="female" id="female" autocomplete="off">
+                  <label class="btn" for="female">女性</label>
+                </div>
+                <div class="mb-3 col-10 col-lg-8 mx-auto">
+                    <label class="form-label" for="age">請輸入年齡</label>
+                    <input type="number" class="form-control input-style" id="age">
+                    <small class="text-danger"> 請務必填寫此欄位 </small>
+                </div>
+                <div class="mb-3 col-10 col-lg-8 mx-auto">
+                    <label class="form-label" for="height">請輸入身高 <small> ( 公分 )</small></label>
+                    <input type="number" class="form-control input-style" id="height">
+                    <small class="text-danger"> 請務必填寫此欄位 </small>
+                </div>
+                <div class="mb-3 col-10 col-lg-8 mx-auto">
+                    <label class="form-label" for="weight">請輸入體重 <small> ( 公斤 )</small></label>
+                    <input type="number" class="form-control input-style" id="weight">
+                    <small class="text-danger"> 請務必填寫此欄位 </small>
+                </div>
+                <div class="mb-3 col-10 col-lg-8 mx-auto">
+                    <label class="form-label" for="activity">請選擇活動量</label>
+                    <select class="form-select input-style" id="activity">
+                      <option value="1.2" selected>長時間久坐/幾乎沒在運動</option>
+                      <option value="1.375">每週運動 1 至 3 天</option>
+                      <option value="1.55">每週運動 3 至 5 天</option>
+                      <option value="1.725">每週運動 5 至 7 天</option>
+                      <option value="1.9">每天高強度運動或高勞力工作者</option>
+                    </select>
+                </div>
+                <div class="mt-3 d-grid gap-2 mb-3 col-10 col-lg-8 mx-auto">
+                    <button class="btn btn-primary btn-result" type="button" id="generate">計算 BMR 與 TDEE</button>
+                </div>
+            </div>
+          </div>
+          <div class="targetElement"></div>
+          <div class="row col-lg-6 mx-auto rounded p-3 shadow mt-5" style="background-color: #222;">
+            <div class="mt-3 mb-3">
+              <div class="d-flex p-3 mb-4 calc-title">計算結果</div>
+              <div class="mb-3 col-10 col-lg-8 mx-auto">
+                <label class="form-label">您的基礎代謝率 BMR</label>
+                <input class="form-control input-style" id="bmrResult" readonly></input>
+              </div>
+              <div class="mb-3 col-10 col-lg-8 mx-auto">
+                <label class="form-label">您的每日消耗總熱量 TDEE</label>
+                <input class="form-control input-style" id="tdeeResult" readonly></input>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 mx-auto mt-5">
+            <h3><span class="badge text-bg-secondary">免責聲明</span></h3>
+            <h4>本計算機僅供參考，如有減重或增重需求，請尋求並遵循醫師或營養師之指示。</h4>
+          </div>
+        </main>
+        <footer>
+          <div id="footer-placeholder"></div>
+        </footer>
+    </body>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous" ></script>
+    <!-- 將 header 設置為通用模板 -->
+    <script src="js/comJS.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('#age, #height, #weight').siblings('.text-danger').hide();
+
+          // 監聽輸入事件
+        $('#age, #height, #weight').on('input', function() {
+          var age = $('#age').val()
+          var height = $('#height').val()
+          var weight = $('#weight').val()
+
+          if (age != '') {
+            $('#age').removeClass('is-invalid');
+            $('#age').siblings('.text-danger').hide();
+          }
+
+          if (height != '') {
+            $('#height').removeClass('is-invalid');
+            $('#height').siblings('.text-danger').hide();
+          }
+
+          if (weight != '') {
+            $('#weight').removeClass('is-invalid');
+            $('#weight').siblings('.text-danger').hide();
+          }
+        });
+
+        $('#generate').on('click', function () {
+          // 獲取使用者輸入的資料
+          var gender = $('input[name="gender"]:checked').val();
+          var age = $('#age').val()
+          var height = $('#height').val()
+          var weight = $('#weight').val()
+          var activity = $('#activity').val()
+
+          if (age === '') {
+            // 如果年齡欄位為空，顯示提醒文字並改變輸入框樣式
+            $('#age').addClass('is-invalid');
+            $('#age').siblings('.text-danger').show();
+          }
+          
+          if (height === '') {
+            // 如果年齡欄位為空，顯示提醒文字並改變輸入框樣式
+            $('#height').addClass('is-invalid');
+            $('#height').siblings('.text-danger').show();
+          }
+          
+          if (weight === '') {
+            // 如果年齡欄位為空，顯示提醒文字並改變輸入框樣式
+            $('#weight').addClass('is-invalid');
+            $('#weight').siblings('.text-danger').show();
+          }
+
+          // 計算 BMR
+          var bmrResult = ((10 * weight) + (6.25 * height) - (5 * age));
+
+          if (gender == "female") {
+              bmrResult -= 161;
+          } else {
+              bmrResult += 5;
+          }
+          
+          bmrResult = Math.round(bmrResult);
+
+          $('#bmrResult').val(bmrResult + " 大卡");
+
+          // 計算 TDEE
+          var tdeeResult = bmrResult * activity ;
+
+          tdeeResult = Math.round(tdeeResult);
+          $('#tdeeResult').val(tdeeResult + " 大卡");
+        
+        });
+      });
+    </script>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>棒球打者計算機 - HarryC</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="css/style1.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+
+    <body style="background-color: #333;">
+        <header class="sticky-top">
+          <div id="navbar-placeholder"></div>
+        </header>
+        <main class="container">
+          <h1 class="text-center text-warning title-text">棒球打者數據計算機</h1>
+          <div class="row mb-3">
+            <div class="col-lg-5 mx-auto rounded p-3 shadow mt-5" style="background-color: #222;">
+              <h3 class="text-center">日期加減計算</h3>
+              <div class="mb-3 col-lg-8 mx-auto">
+                  <label class="form-label" for="dateInput">選擇日期</label>
+                  <input type="date" class="form-control" id="dateInput">
+              </div>
+              <div class="mb-3 col-lg-8 mx-auto">
+                  <label class="form-label" for="daysInput">加減天數</label>
+                  <input type="text" class="form-control" id="daysInput">
+              </div>
+              <div class="d-grid gap-2 mb-3 col-lg-8 mx-auto">
+                  <button class="btn btn-primary" type="button" id="dateCalcButton">計算指定日期加減</button>
+              </div>
+              <div class="mb-3 col-lg-8 mx-auto">
+                  <label class="form-label">計算結果</label>
+                  <input class="form-control" id="dateCalcResult" readonly>
+              </div>
+          </div>
+            <div class="col-lg-5 mx-auto rounded p-3 shadow mt-5" style="background-color: #222;">
+              <h3 class="text-center">日期相隔天數計算</h3>
+              <div class="mb-3 col-lg-8 mx-auto">
+                <label class="form-label" for="firstDateInput">選擇第一個日期</label>
+                <input type="date" class="form-control" id="firstDateInput">
+              </div>
+              <div class="mb-3 col-lg-8 mx-auto">
+                <label class="form-label" for="secondDateInput">選擇第二個日期</label>
+                <input type="date" class="form-control" id="secondDateInput">
+              </div>
+              <div class="d-grid gap-2 mb-3 col-lg-8 mx-auto">
+                <button class="btn btn-primary" type="button" id="daysCalcButton">計算兩個日期相隔天數</button>
+              </div>
+              <div class="mb-3 col-lg-8 mx-auto">
+                <label class="form-label">隔天才算第一天</label>
+                <input class="form-control" id="firstDaysCalcResult" readonly>
+              </div>
+              <div class="mb-3 col-lg-8 mx-auto">
+                <label class="form-label">包含第一天在內</label>
+                <input class="form-control" id="secondDaysCalcResult" readonly>
+              </div>
+            </div>
+            </div>
+          </div>
+        </main>
+        <footer>
+        </footer>
+    </body>
+    <!-- JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous" ></script>
+  <!-- 將 header 設置為通用模板 -->
+  <script>
+    $(function () {
+      $("#navbar-placeholder").load("common/header.html");
+    });
+  </script>
+
+  <script>
+    // 日期加減計算器的 JS
+    $(document).ready(function () {
+        $("#dateCalcButton").click(function () {
+                // 取得使用者輸入的日期和天數
+                var selectedDate = new Date($("#dateInput").val());
+                var daysToAdd = parseInt($("#daysInput").val());
+
+                if (isNaN(selectedDate.getTime())) {
+                    // 若日期無效，顯示錯誤訊息
+                    $("#dateCalcResult").val("請選擇正確的日期");
+                } else if (isNaN(daysToAdd)) {
+                    // 若為空或非數字，顯示錯誤訊息
+                    $("#dateCalcResult").val("請確認加減天數是否輸入正確");
+                } else {
+                    // 進行日期計算
+                    var resultDate = new Date(selectedDate);
+                    resultDate.setDate(selectedDate.getDate() + daysToAdd);
+                    var daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                    var dayOfWeekText = daysOfWeek[resultDate.getDay()];
+
+                    // 將計算結果顯示在結果區域
+                    $("#dateCalcResult").val(resultDate.toLocaleDateString() + " " + dayOfWeekText);
+                }
+            });
+    });
+
+    // 日期相隔天數計算器的 JS
+    $(document).ready(function (){
+        $("#daysCalcButton").click(function(){
+            // 取得使用者輸入的兩個日期
+            var firstDate = new Date($("#firstDateInput").val());
+            var secondDate = new Date($("#secondDateInput").val());
+
+            var timeDifference = secondDate.getTime() - firstDate.getTime();
+            
+            // 24小時後(隔日)才算第一天的結果
+
+            if (isNaN(timeDifference)) {
+                $("#firstDaysCalcResult").val("請選擇正確的日期");
+                $("#secondDaysCalcResult").val("請選擇正確的日期");
+            } else {
+                var firstResultDays = Math.abs(Math.floor(timeDifference / (1000 * 60 * 60 * 24)));
+                $("#firstDaysCalcResult").val(firstResultDays + " 天");
+                // 包含第一個日期在內
+                var secondResultDays = Math.abs(Math.floor(timeDifference / (1000 * 60 * 60 * 24) + 1));
+                $("#secondDaysCalcResult").val(secondResultDays + " 天");
+            }
+        })
+    })
+
+  </script>
+</html>

@@ -1,0 +1,65 @@
+@font-face {
+  font-family: 'GenSenRounded';
+  src: url('/HarryC/font/GenSenRounded-R.ttc');
+}
+
+  body {
+    color: #fff;
+    font-family: 'GenSenRounded', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+  }
+
+  header {
+    font-size: 28px;
+  }
+
+  .navbar {
+    font-family: 'GenSenRounded', sans-serif;
+    font-size: 36px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* 添加2像素高的陰影，看起來像是線條 */
+  }
+
+  main {
+    padding: 25px;
+  }
+
+  .title-text {
+    font-family: 'GenSenRounded', sans-serif;
+    font-size: 48px;
+  }
+
+  .calc-title {
+    background-color: #444;
+    font-family: 'GenSenRounded', sans-serif;
+    font-size: 36px;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  .btn {
+    font-family: 'GenSenRounded', sans-serif;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .input-style {
+    font-family: 'GenSenRounded', sans-serif;
+    font-size: 20px;
+  }
+  
+  .select-style {
+    font-family: 'GenSenRounded', sans-serif;
+    font-size: 20px;
+  }
+
+  .negative-result {
+    background-color: green;
+    color: white;
+  }
+
+  .positive-result {
+      background-color: red;
+      color: white;
+  }

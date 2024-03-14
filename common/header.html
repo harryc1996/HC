@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg bg-black bg-gradient" data-bs-theme="dark">
+    <div class="container-fluid container">
+      <a class="navbar-brand" href="index.html">
+        <img src="image/Banner Logo.png" alt="Logo" height="50" class="d-inline-block align-text-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-ml-flex flex-row-reverse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="index.html" id="blog">Blog</a>
+          <a class="nav-link" href="tool.html" id="tool">Tool</a>
+          <a class="nav-link" href="about.html" id="about">About</a>
+        </div>
+      </div>
+    </div>
+</nav>
+<script>
+    $(document).ready(function () {
+        // 獲取當前 URL 的文件名，例如 "Tool.html"
+        var currentPage = location.pathname.split("/").slice(-1)[0];
+        
+        // 定義計算工具相關的文件名列表
+        var toolPages = ["password.html", "date.html", "stocktradecalc.html"];
+
+
+        // 遍歷導覽列中的每個連結
+        $(".navbar-nav a").each(function () {
+            // 獲取連結的 href 屬性值，例如 "Tool.html"
+            var linkPage = $(this).attr("href");
+
+            // 將連結中的斜線去除，例如 "Tool.html" 變為 "Tool"
+            linkPage = linkPage.replace("/", "");
+
+            // 如果當前頁面和連結的 href 屬性值匹配，添加 active 類別
+            if (currentPage === linkPage) {
+                $(this).addClass("active");
+            }
+
+            if (currentPage == "index.html") {
+                $("#blog").addClass("active");
+            }
+
+            // 如果為工具相關頁面，tool 的 class 也增加 active
+            if (toolPages.includes(currentPage)) {
+                $("#tool").addClass("active");
+            }
+        });
+    });
+</script>
